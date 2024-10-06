@@ -132,7 +132,7 @@ function App() {
       </div>
 
       {/* section 3 */}
-      <div className="text-white">
+      {/* <div className="text-white">
         <div className="xl:px-[15%] px-5 min-h-[20vh] flex flex-col justify-between py-20">
           <h1 className="text-center text-6xl">Token Allocation</h1>
           <div className="flex gap-10 mt-10 justify-around">
@@ -144,7 +144,7 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="py-5 text-center text-white montserrat">
         ©2024 $Jimpo, All Right Reserved.
       </div>
