@@ -44,7 +44,7 @@ function App() {
             <div className="hidden md:block">Jimpo Sonic</div>
           </a>
           <a
-            href="/"
+            href="https://spooky.fi/#/swap?inputCurrency=ETH&outputCurrency=0xE375A2337C3eF03D83B6538E7857595EE97E0585"
             className="bg-[#FFCA56] text-black px-6 py-3 rounded-full font-semibold montserrat"
           >
             Buy Some $Jimpo
@@ -69,7 +69,9 @@ function App() {
                 <p>Our mission is to spread fun</p>
               </div>
 
-              <div className="montserrat mt-5 font-bold">CA: 0xcoming_soon</div>
+              <div className="montserrat mt-5 font-bold">
+                CA: 0xE375A2337C3eF03D83B6538E7857595EE97E0585
+              </div>
 
               <div className="flex gap-3 mt-5 flex-wrap">
                 {/* <a
@@ -79,7 +81,7 @@ function App() {
                   Browse Memes
                 </a> */}
                 <a
-                  href="/"
+                  href="https://spooky.fi/#/swap?inputCurrency=ETH&outputCurrency=0xE375A2337C3eF03D83B6538E7857595EE97E0585"
                   className="bg-[#FFCA56] w-full text-center text-black px-6 py-3 rounded-full font-semibold montserrat"
                 >
                   Buy Some $Jimpo
