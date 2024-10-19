@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider modalSize="compact" initialChain={fantom}>
           <App />
-          <ToastContainer />
+          <ToastContainer position="bottoom-right" />
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
