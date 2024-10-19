@@ -12,7 +12,7 @@ import { erc20Abi } from 'viem';
 import { useQuery } from '@tanstack/react-query';
 import { useTokenBalance } from '../../hooks/useBalance';
 import { waitForTransactionReceipt } from '@wagmi/core';
-import { ethers } from 'ethers';
+import { ethers, MaxUint256 } from 'ethers';
 import { toast } from 'react-toastify';
 
 const coins = ['Jimpo'];
@@ -148,7 +148,7 @@ function GameSection() {
       abi: erc20Abi,
       address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b',
       functionName: 'approve',
-      args: ['0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F', 2 * 10 ** 18],
+      args: ['0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F', MaxUint256],
     });
     console.log(txn);
   };
