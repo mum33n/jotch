@@ -14,8 +14,17 @@ import { useTokenBalance } from '../../hooks/useBalance';
 import { waitForTransactionReceipt } from '@wagmi/core';
 import { ethers, MaxUint256 } from 'ethers';
 import { toast } from 'react-toastify';
-
-const coins = ['Jimpo'];
+const tokenToSymbol = {
+  '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b': 'Jimpo',
+  '0x1f008f9af47b387bdf67a25f2b8219942207298f': 'Fknuckles',
+  '0x9c375c4fe659bf9a8af721cec9fac250b92493a5': 'BOF',
+};
+const coins = [
+  { name: 'Jimpo', address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b' },
+  { name: 'Fknuckles', address: '0x1f008f9af47b387bdf67a25f2b8219942207298f' },
+  { name: 'BOF', address: '0x9c375c4fe659bf9a8af721cec9fac250b92493a5' },
+];
+// const coins = [];
 const coinHead = '/coinhead.png';
 const cointail = '/cointail.png';
 
@@ -23,6 +32,7 @@ function GameSection() {
   const [selected, setSelected] = useState('');
   const [playing, setPlaying] = useState(false);
   const [wager, setWager] = useState(0);
+  const [selectedCoin, setSelectedCoin] = useState(coins[0].address);
   // const signer=useP
   const { writeContractAsync } = useWriteContract();
   const { address } = useAccount();
@@ -51,12 +61,12 @@ function GameSection() {
   //   refetchInterval: 2000,
   // });
 
-  const balance = useTokenBalance();
+  const balance = useTokenBalance(selectedCoin);
 
   const { data } = useReadContract({
     abi: erc20Abi,
     functionName: 'allowance',
-    address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b',
+    address: selectedCoin,
     args: [address, '0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F'],
     watch: true,
   });
@@ -71,11 +81,7 @@ function GameSection() {
         abi,
         address: '0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F',
         functionName: 'play',
-        args: [
-          '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b',
-          1 * 10 ** 18,
-          selected === 'Heads' ? 0 : 1,
-        ],
+        args: [selectedCoin, wager * 10 ** 18, selected === 'Heads' ? 0 : 1],
       });
 
       // const config = useConfig();
@@ -146,7 +152,7 @@ function GameSection() {
   const approve = async () => {
     const txn = await writeContractAsync({
       abi: erc20Abi,
-      address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b',
+      address: selectedCoin,
       functionName: 'approve',
       args: ['0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F', MaxUint256],
     });
@@ -159,7 +165,9 @@ function GameSection() {
       <div className="border-2 p-2 rounded-xl flex flex-col gap-2">
         <div className="flex justify-between">
           <div>Wager</div>
-          <div>Balance: {balance.balance} JIMPO</div>
+          <div>
+            Balance: {balance.balance} {tokenToSymbol[selectedCoin]}
+          </div>
         </div>
 
         <div className="flex justify-between items-center">
@@ -171,10 +179,14 @@ function GameSection() {
             className="bg-[#FFCA56] placeholder:text-gray-700 text-2xl w-1/2 focus:outline-none appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
 
-          <select className="ml-3 border p-2 rounded-lg bg-[#FFCA56]">
+          <select
+            value={selectedCoin}
+            onChange={(e) => setSelectedCoin(e.target.value)}
+            className="ml-3 border p-2 rounded-lg bg-[#FFCA56]"
+          >
             {coins.map((coin) => (
-              <option key={coin} value={coin} className="bg-white">
-                {coin}
+              <option key={coin.name} value={coin.address} className="bg-white">
+                {coin.name}
               </option>
             ))}
           </select>
@@ -222,7 +234,7 @@ function GameSection() {
           >
             Wallet not connected
           </button>
-        ) : (Number(data) / 1) * 10 ** 18 < 2 * 10 ** 18 ? (
+        ) : (Number(data) / 1) * 10 ** 18 < wager * 10 ** 18 ? (
           <button
             onClick={approve}
             className="bg-gray-800 text-xl text-white w-full transition-all duration-300 hover:scale-105 active:scale-95 py-5 rounded-xl border-2 outline-white"
@@ -240,7 +252,7 @@ function GameSection() {
               : !wager
               ? 'Enter wager amount'
               : wager > balance.balance
-              ? 'Insfficient Balance'
+              ? 'Insufficient Balance'
               : playing
               ? 'Flipping ...'
               : 'Flip'}

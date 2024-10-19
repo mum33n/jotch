@@ -1,12 +1,12 @@
 import { erc20Abi } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
-export const useTokenBalance = () => {
+export const useTokenBalance = (token) => {
   const { address } = useAccount();
   const { data, isError, isLoading, error } = useReadContract({
     abi: erc20Abi,
     functionName: 'balanceOf',
-    address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b',
+    address: token,
     args: [address],
     watch: true,
   });
