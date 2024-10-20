@@ -19,6 +19,7 @@ const tokenToSymbol = {
   '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b': 'Jimpo',
   '0x1f008f9af47b387bdf67a25f2b8219942207298f': 'Fknuckles',
   '0x9c375c4fe659bf9a8af721cec9fac250b92493a5': 'BOF',
+  '0xe816b19b673088c02f3c9e03bc4a66e1ef676cf7': 'Versus',
 };
 const coins = [
   { name: 'Jimpo', address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b' },
