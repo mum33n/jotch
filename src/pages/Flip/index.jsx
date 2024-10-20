@@ -1,6 +1,5 @@
 import AdSection from '../../components/AdSection';
 import GameSection from '../../components/GameSection';
-
 function Flip() {
   return (
     <div className="mt-10 md:mt-20 xl:px-[15%] px-5 py-20">

@@ -14,6 +14,7 @@ import { useTokenBalance } from '../../hooks/useBalance';
 import { waitForTransactionReceipt } from '@wagmi/core';
 import { ethers, MaxUint256 } from 'ethers';
 import { toast } from 'react-toastify';
+import FlipAnimation from './components/Coinflip';
 const tokenToSymbol = {
   '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b': 'Jimpo',
   '0x1f008f9af47b387bdf67a25f2b8219942207298f': 'Fknuckles',
@@ -85,16 +86,17 @@ function GameSection() {
       });
 
       // const config = useConfig();
+      toast.update(toastId, {
+        type: 'success',
+        render: 'Tansaction successful, evaluating result',
+      });
 
       // const receipt = useWaitForTransactionReceipt({ hash: txn });
       const receipt = await waitForTransactionReceipt(config, {
         hash: txn,
         chainId,
       });
-      toast.update(toastId, {
-        type: 'success',
-        render: 'Tansaction successful, evaluating result',
-      });
+
       // provid
       if (receipt && receipt.logs) {
         try {
@@ -194,29 +196,35 @@ function GameSection() {
       </div>
 
       <div className="flex flex-col border-2 p-2 rounded-xl pl-14 pr-14 gap-5">
-        <div className="flex justify-between pl-4 pr-4">
-          <div>Heads</div>
-          <div>or</div>
-          <div>Tails</div>
-        </div>
-        <div className="flex justify-between">
-          <img
-            className={`w-24 cursor-pointer hover:scale-95 transition-all duration-300 ${
-              selected === 'Heads' ? 'opacity-100' : 'opacity-40'
-            }`}
-            src={coinHead}
-            alt="Heads"
-            onClick={() => setSelected('Heads')}
-          />
-          <img
-            className={`w-24 hover:scale-95 cursor-pointer transition-all duration-300 ${
-              selected === 'Tails' ? 'opacity-100' : 'opacity-40'
-            }`}
-            src={cointail}
-            alt="Tails"
-            onClick={() => setSelected('Tails')}
-          />
-        </div>
+        {playing ? (
+          <FlipAnimation />
+        ) : (
+          <>
+            <div className="flex justify-between pl-4 pr-4">
+              <div>Heads</div>
+              <div>or</div>
+              <div>Tails</div>
+            </div>
+            <div className="flex justify-between">
+              <img
+                className={`w-24 cursor-pointer hover:scale-95 transition-all duration-300 ${
+                  selected === 'Heads' ? 'opacity-100' : 'opacity-40'
+                }`}
+                src={coinHead}
+                alt="Heads"
+                onClick={() => setSelected('Heads')}
+              />
+              <img
+                className={`w-24 hover:scale-95 cursor-pointer transition-all duration-300 ${
+                  selected === 'Tails' ? 'opacity-100' : 'opacity-40'
+                }`}
+                src={cointail}
+                alt="Tails"
+                onClick={() => setSelected('Tails')}
+              />
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex flex-col gap-2">
