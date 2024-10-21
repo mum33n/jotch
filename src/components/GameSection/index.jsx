@@ -16,13 +16,13 @@ import { ethers, MaxUint256 } from 'ethers';
 import { toast } from 'react-toastify';
 import FlipAnimation from './components/Coinflip';
 const tokenToSymbol = {
-  '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b': 'Jimpo',
+  '0xE375A2337C3eF03D83B6538E7857595EE97E0585': 'Jimpo',
   '0x1f008f9af47b387bdf67a25f2b8219942207298f': 'Fknuckles',
   '0x9c375c4fe659bf9a8af721cec9fac250b92493a5': 'BOF',
   '0xe816b19b673088c02f3c9e03bc4a66e1ef676cf7': 'Versus',
 };
 const coins = [
-  { name: 'Jimpo', address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b' },
+  { name: 'Jimpo', address: '0xE375A2337C3eF03D83B6538E7857595EE97E0585' },
   { name: 'Fknuckles', address: '0x1f008f9af47b387bdf67a25f2b8219942207298f' },
   { name: 'BOF', address: '0x9c375c4fe659bf9a8af721cec9fac250b92493a5' },
   { name: 'Versus', address: '0xe816b19b673088c02f3c9e03bc4a66e1ef676cf7' },
@@ -50,8 +50,8 @@ function GameSection() {
   //   const result = useReadContract({
   //     abi: erc20Abi,
   //     functionName: 'allowance',
-  //     address: '0xb9b823Df8408DCbA129D0B77BDD03910dC4c2D2b',
-  //     args: [address, '0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F'],
+  //     address: '0xE375A2337C3eF03D83B6538E7857595EE97E0585',
+  //     args: [address, '0xC962C3A628970e7fB98e42C05fE424518cDDd8F7'],
   //   });
 
   //   console.log('result: ', result);
@@ -70,7 +70,7 @@ function GameSection() {
     abi: erc20Abi,
     functionName: 'allowance',
     address: selectedCoin,
-    args: [address, '0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F'],
+    args: [address, '0xC962C3A628970e7fB98e42C05fE424518cDDd8F7'],
     watch: true,
   });
 
@@ -82,7 +82,7 @@ function GameSection() {
     try {
       const txn = await writeContractAsync({
         abi,
-        address: '0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F',
+        address: '0xC962C3A628970e7fB98e42C05fE424518cDDd8F7',
         functionName: 'play',
         args: [selectedCoin, wager * 10 ** 18, selected === 'Heads' ? 0 : 1],
       });
@@ -106,7 +106,7 @@ function GameSection() {
           const filteredLog = receipt.logs.filter(
             (log) =>
               log.address ==
-              '0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F'.toLowerCase()
+              '0xC962C3A628970e7fB98e42C05fE424518cDDd8F7'.toLowerCase()
           );
           console.log('filtered log', filteredLog);
           const resultEvent = eventInterface.parseLog(filteredLog[0]);
@@ -158,7 +158,7 @@ function GameSection() {
       abi: erc20Abi,
       address: selectedCoin,
       functionName: 'approve',
-      args: ['0xf13E7B2aE9474d54b540c91300F1eCA0Dc08137F', MaxUint256],
+      args: ['0xC962C3A628970e7fB98e42C05fE424518cDDd8F7', MaxUint256],
     });
     console.log(txn);
   };
