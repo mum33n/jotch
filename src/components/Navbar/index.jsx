@@ -1,5 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
   const location = useLocation();
@@ -18,12 +18,12 @@ function Navbar() {
         <div className="hidden md:block">Jimpo Sonic</div>
       </a>
       {isHome && (
-        <a
-          href="https://spooky.fi/#/swap?inputCurrency=ETH&outputCurrency=0xE375A2337C3eF03D83B6538E7857595EE97E0585"
+        <Link
+          to="/flip"
           className="bg-[#FFCA56] text-black px-6 py-3 rounded-full font-semibold montserrat"
         >
-          Buy Some $Jimpo
-        </a>
+          Flip
+        </Link>
       )}
       {!isHome && <ConnectButton showBalance={false} label="Connect Wallet" />}
     </div>
