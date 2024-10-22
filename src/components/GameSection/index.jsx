@@ -85,6 +85,7 @@ function GameSection() {
         address: '0xC962C3A628970e7fB98e42C05fE424518cDDd8F7',
         functionName: 'play',
         args: [selectedCoin, wager * 10 ** 18, selected === 'Heads' ? 0 : 1],
+        gasLimit: 2_000_000,
       });
 
       // const config = useConfig();
