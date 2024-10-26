@@ -9,6 +9,8 @@ import { fantom } from 'viem/chains';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@rainbow-me/rainbowkit/styles.css';
+// import 'react-multi-carousel/lib/styles.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const config = getDefaultConfig({
   appName: 'Jimbo',
